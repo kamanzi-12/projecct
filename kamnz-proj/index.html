@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kamanz-ProDev</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0c;
+  --card:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.12);
+  --text:#f5f5f7;
+  --muted:#a1a1aa;
+  --accent:#0a84ff;
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#0b0b0c,#111113);
+  color:var(--text);
+}
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  display:flex;
+  justify-content:center;
+  backdrop-filter:blur(14px);
+  background:rgba(20,20,22,0.6);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+}
+nav .inner{
+  max-width:1000px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:14px 20px;
+}
+nav a{color:var(--muted);text-decoration:none;margin-left:20px;font-size:14px}
+nav a:hover{color:white}
+
+header{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+header h1{font-size:clamp(2.5rem,6vw,4rem);margin:0}
+header p{color:var(--muted)}
+
+section{max-width:1000px;margin:auto;padding:100px 20px}
+section h2{font-size:2rem;margin-bottom:20px}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:20px;
+  transition:0.4s ease;
+  opacity:0;
+  transform:translateY(40px);
+}
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.card:hover{transform:translateY(-5px)}
+
+/* PROJECT GRID */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.project-card{
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--card);
+  transition:0.4s;
+}
+.project-card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+.project-card .content{
+  padding:15px;
+}
+.project-card:hover{
+  transform:scale(1.03);
+}
+
+footer{text-align:center;padding:40px;color:var(--muted)}
+.btn{
+  margin-top:20px;
+  padding:12px 20px;
+  border-radius:999px;
+  background:var(--accent);
+  color:white;
+  text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<nav>
+  <div class="inner">
+    <div><strong>Kamanz-ProDev</strong></div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <h1 id="typing"></h1>
+  <p>Fullstack Developer crafting modern web experiences</p>
+  <a href="#projects" class="btn">View My Work</a>
+</header>
+
+<section id="about">
+  <h2>About Me</h2>
+  <div class="card">I am a passionate Fullstack developer focused on building clean, fast, and user-friendly applications.</div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="card">HTML • CSS • JavaScript • React • Node.js</div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project-card card">
+      <img src="https://source.unsplash.com/400x300/?website" />
+      <div class="content">
+        <h3>Portfolio Website</h3>
+        <p>Modern responsive personal portfolio.</p>
+      </div>
+    </div>
+
+    <div class="project-card card">
+      <img src="https://source.unsplash.com/400x300/?app" />
+      <div class="content">
+        <h3>Web App</h3>
+        <p>Fullstack application with API integration.</p>
+      </div>
+    </div>
+
+    <div class="project-card card">
+      <img src="https://source.unsplash.com/400x300/?dashboard" />
+      <div class="content">
+        <h3>Dashboard UI</h3>
+        <p>Clean admin dashboard interface.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="card">
+    WhatsApp: 0783737588<br>
+    Email: kamanzijoseph516@gmail.com<br>
+    Instagram: Kamanz-250<br>
+    Facebook: KamanzJeph Og Tone
+  </div>
+</section>
+
+<footer>© 2026 Kamanz-ProDev</footer>
+
+<script>
+// Scroll animation
+const cards = document.querySelectorAll('.card');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+cards.forEach(card => observer.observe(card));
+
+// Typing animation
+const text = "Hi, I'm Kamanz-ProDev";
+let index = 0;
+const typingElement = document.getElementById("typing");
+
+function type(){
+  if(index < text.length){
+    typingElement.innerHTML += text.charAt(index);
+    index++;
+    setTimeout(type, 80);
+  }
+}
+
+window.addEventListener('load', type);
+</script>
+
+</body>
+</html>
